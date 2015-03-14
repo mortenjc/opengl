@@ -1,0 +1,30 @@
+##!nmake
+
+!include <win32.mak>
+
+OPENGL = glut32.lib glu32.lib opengl32.lib
+GLUT = "c:/PROGRA~1/devstudio/vc/include/GL"
+
+CFILES  = npr.c hatch.c vpaint.c overlap.c textile.c
+TARGETS	= $(CFILES:.c=.exe)
+LCFLAGS	= $(cflags) $(cdebug) -I../util -I$(GLUT) -DWIN32
+LLDLIBS	= $(lflags) $(ldebug) $(OPENGL) $(guilibs)
+
+default	: $(TARGETS)
+
+clean	:
+	@del *.obj
+
+clobber	: clean
+	@del *.exe
+
+$(TARGETS): $*.obj
+        $(link) -out:$@ $** $(LLDLIBS)
+
+.c.obj	: 
+	$(CC) $(LCFLAGS) $<
+
+# dependencies (must come AFTER inference rules)
+vpaint.exe \
+textile.exe:	texture.obj
+

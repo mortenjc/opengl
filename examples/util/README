@@ -1,0 +1,34 @@
+	
+	Texture Utilities:
+
+	texture.c and texture.h:
+
+	The lack of a library and Makefile is deliberate. We're trying
+	to keep the code machine independent. Just compile with the
+	source code. Here's a sample compile line:
+
+	LIBS = -lglut -lGLw -lGLU -lGL -lXmu -lXt -lX11 -lm
+
+	sample: sample.c ../Util/texture.h ../Util/texture.c
+		cc $(CFLAGS) -o $@ sample.c ../Util/texture.c $(LIBS)
+
+	To use the code in your program is easy. First put in
+	the header file:
+
+	#include "../Util/texture.h"
+
+	Then just make the following call:
+
+	unsigned *teximage; /* pointer to texture data */
+	int texwid, texht; /* dimensions of texture that was read */
+	int texcomps; /* number of components in external format */
+
+	teximage = read_texture(filepath, &texwid, &texht, &texcomps);
+
+	Now you can load the texture very easily:
+
+	glTexImage2D(GL_TEXTURE_2D, 0, internal_format, texwid, texht, 0,
+                    GL_RGBA, GL_UNSIGNED_BYTE, teximage);
+
+
+	 
