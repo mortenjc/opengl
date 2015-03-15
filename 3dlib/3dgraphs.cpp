@@ -1,6 +1,16 @@
 #include <stdlib.h>
+
+#ifdef MAC
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/gl.h>
 #include <GL/glut.h>
-#include "3dcomponents.h"
+#include <GL/glu.h>
+#endif
+
+#include <3dcomponents.h>
 #include <nr3.h>
 
 

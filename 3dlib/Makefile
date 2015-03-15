@@ -1,7 +1,6 @@
 
-
-PROG=solarsystem
-INCLUDE= -I../nr -I../3dlib
+INCLUDE = -I. -I../nr
+LIB=lib3dlib.a
 
 MAC=y
 ifdef MAC
@@ -13,12 +12,19 @@ else
   LDFLAGS     = -L/usr/X11/lib -lglut -lGLU -lGL -L../3dlib -l3dlib
 endif
 
-  LDFLAGS += -L../3dlib -l3dlib
 
 CFLAGS += $(INCLUDE)
 
-all:
-	g++ *.cpp $(CFLAGS) $(LDFLAGS) -o $(PROG)
+
+SOURCES = 3dcomponents.cpp 3dgraphs.cpp imageloader.cpp
+
+OBJECTS = $(SOURCES:%.cpp=%.o)
+
+all: $(OBJECTS)
+	ar -r $(LIB) $(OBJECTS) 
+
+%.o: %.cpp
+	g++ -c $< $(CFLAGS) -o $@
 
 clean:
-	rm -f $(PROG)
+	rm -fr $(OBJECTS) $(LIB)

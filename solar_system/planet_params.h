@@ -1,4 +1,12 @@
+#ifdef MAC
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/gl.h>
 #include <GL/glut.h>
+#include <GL/glu.h>
+#endif
 
 GLfloat yellow[]= {1.00, 1.00, 0.00};
 GLfloat orange[]= {0.80, 0.80, 0.20};

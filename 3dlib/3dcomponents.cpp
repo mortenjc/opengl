@@ -1,6 +1,15 @@
 #include <math.h>
 #include <string.h>
+
+#ifdef MAC
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/gl.h>
 #include <GL/glut.h>
+#include <GL/glu.h>
+#endif
 
 void outputText(float x, float y, float z,  char *string)
 {

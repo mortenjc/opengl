@@ -1,7 +1,17 @@
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
+
+#ifdef MAC
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#include <GLUT/glut.h>
+#else
+#include <GL/gl.h>
 #include <GL/glut.h>
+#include <GL/glu.h>
+#endif
+
 #include <imageloader.h>
 #include "planet_params.h"
 #include <aux_functions.h>
@@ -157,7 +167,7 @@ void initRendering() {
 	{
 		pt = &solar_system[i];
 		
-		snprintf(texname, sizeof(texname) , "%s.bmp", pt->name);
+		snprintf(texname, sizeof(texname) , "bmp/%s.bmp", pt->name);
 		image=loadBMP(texname);
 		pt->textureID=loadTexture(image);
 		printf("Loaded texture: %s with texture ID: %d\n", texname, pt->textureID);
