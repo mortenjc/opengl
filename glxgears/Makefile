@@ -1,12 +1,10 @@
 
-
-
 CFLAGS=
 
 LDFLAGS = -framework GLUT -framework OpenGL -framework Cocoa 
-LDFLAGS+= -L"/System/Library/Frameworks/OpenGL.framework/Libraries"
+LDFPAGS+= -L"/System/Library/Frameworks/OpenGL.framework/Libraries"
 
-all: example
+all: glxgears
 
-example: main.c
+glxgears: glxgears.c
 	$(CC) $< $(CFLAGS) $(LDFLAGS) -o $@
