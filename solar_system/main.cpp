@@ -17,6 +17,16 @@
 #include <aux_functions.h>
 #include <3dcomponents.h>
 
+void helptext()
+{
+    printf(" k,l   rotate (-,+) around green axis\n");
+    printf(" q,a   rotate (-,+) around blue  axis\n");
+    printf(" t,r   increase/decrease speed\n");
+    printf(" v,f   zoom in, out\n");
+    printf(" p     line or fill\n");
+    printf(" ESC   quit\n");
+}
+
 using namespace std;
 
 float _time = 0;			  //Time in 'ticks'
@@ -166,7 +176,7 @@ void initRendering() {
 	while (solar_system[i].name != NULL)
 	{
 		pt = &solar_system[i];
-		
+		printf("Debug adding %s\n", pt->name);
 		snprintf(texname, sizeof(texname) , "bmp/%s.bmp", pt->name);
 		image=loadBMP(texname);
 		pt->textureID=loadTexture(image);
@@ -212,15 +222,19 @@ void drawScene()
 //Called continously from glutIdle state
 void update() 
 {
+#if 0
 	_time+=dupt;
 	if ( ((int)(_time/dupt) % update_freq) == 0) {
 		_days+=2;
 	}
+#endif
+        _days += 10;
 	glutPostRedisplay();
 }
 
 int main(int argc, char** argv) 
 {
+        helptext();
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 	glutInitWindowSize(800, 600);
